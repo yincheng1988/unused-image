@@ -1,6 +1,6 @@
 # unsed-image
 
-This shell script is used to check and clean unused image file in your project  directory，supoort Android and IOS. 
+This shell script is used to check and clean unused image file in your project  directory，supoort IOS(Only check Images.xcassets). 
 
 ## show unused image file
 

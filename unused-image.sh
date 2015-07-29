@@ -1,6 +1,4 @@
-#!/bin/sh
-
-PROGNAME=$(basename "$0")
+OGNAME=$(basename "$0")
 PROGDIR=$(dirname "$0")
 
 usage()
@@ -43,25 +41,16 @@ while getopts ":rp:" optname
 done
 
 
-check_files=`find $PRJ_ROOT -name '*.xib' -o -name '*.storyboard' -o -name '*.[mh]'  -o -name '*.pch' -o -name '*.java' -o -name '*.xml'`
+check_files=`find $PRJ_ROOT -name '*.xib' -o -name '*.storyboard' -o -name '*.[mh]'-o -name '*.mm'  -o -name '*.swift'  -o -name '*.pch' -o -name '*.java' -o -name '*.xml'`
 
-for png in `find $PRJ_ROOT -name '*.png'`
+for png in `find $PRJ_ROOT -name '*.imageset'`
 do
     match_name=`basename $png`
 
-    suffix1="@2x.png"
-    suffix2=".9.png"
-    suffix3=".png"
-    suffix4="@3x.png"
-
-    if [[ ${match_name/${suffix1}//} != $match_name ]]; then
-      match_name=${match_name%$suffix1}
-    elif [[ ${match_name/${suffix4}//} != $match_name ]]; then
-   		match_name=${match_name%$suffix4}
-   	elif [[ ${match_name/${suffix2}//} != $match_name ]]; then
-   		match_name=${match_name%$suffix2}
-    else
-    	match_name=${match_name%$suffix3}
+###  Only check Images.xcassets
+    suffix=".imageset"
+    if [[ ${match_name/${suffix}//} != $match_name ]]; then
+      match_name=${match_name%$suffix}
     fi
 
     dir_name=`dirname $png`
